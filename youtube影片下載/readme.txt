@@ -1,1 +1,2 @@
-https://www.youtube.com/watch?v=tQ0yjYUFKAE&ab_channel=JustinBieberVEVO
+1.電腦要有安裝python
+2.使用命令提示字元，輸入"pip install pytube"
