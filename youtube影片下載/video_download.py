@@ -1,12 +1,13 @@
-# coding: utf-8
 from pytube import YouTube
-import os,time
+import os
 
 def find_videos_folder():
     for root, dirs, files in os.walk(os.getcwd()):
         if 'videos' in dirs:
             return os.path.join(root, 'videos')
-    return None
+    videos_folder = os.path.join(os.getcwd(), 'videos')
+    os.makedirs(videos_folder)
+    return videos_folder
 
 def download_video():
     videos_folder = find_videos_folder()
@@ -15,7 +16,7 @@ def download_video():
     highest_resolution_stream = streams.get_highest_resolution()
     highest_resolution_stream.download(videos_folder)
     title = youtubeObject.title
-    print("Video:",title,"is_download_to:", videos_folder)
+    print("Video:", title, "is downloaded to:", videos_folder)
 
 if __name__ == "__main__":
-    download_video()   
+    download_video()
