@@ -2,42 +2,48 @@ import pygame
 from pygame.locals import *
 
 pygame.init()
-DISPLAYSURF = pygame.display.set_mode((500, 400),0,32)  # ³]©w¹CÀ¸­¶­±
-pygame.display.set_caption('Hello World!')  # ³]©w¹CÀ¸¼ĞÃD
-clock = pygame.time.Clock()  # ³Ğ«Ø¤@­Ó®ÉÄÁ¹ï¶H
+DISPLAYSURF = pygame.display.set_mode((500, 400), 0, 32)  # è¨­å®šéŠæˆ²é é¢
+pygame.display.set_caption('Hello World!')  # è¨­å®šéŠæˆ²æ¨™é¡Œ
+clock = pygame.time.Clock()  # å‰µå»ºä¸€å€‹æ™‚é˜å°è±¡
 game_over = False
 flwImg = pygame.image.load('A.png')
 fstartx = 10
 fstarty = 10
 DISPLAYSURF.blit(flwImg, (fstartx, fstarty))
 
+mapFile = open('map.txt', 'r')
+print(mapFile.read())
+content = mapFile.readlines()
+mapFile.close()
+
 def move():
-    global fstartx, fstarty
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_DOWN]:
-        fstarty = fstarty + 5
-        if fstarty > 380:
-            fstarty = 380
-    if keys[pygame.K_UP]:
-        fstarty = fstarty - 5
-        if fstarty < 0:
-            fstarty = 0
-    if keys[pygame.K_LEFT]:
-        fstartx = fstartx - 5
-        if fstartx < 0:
-            fstartx = 0
-    if keys[pygame.K_RIGHT]:
-        fstartx = fstartx + 5
-        if fstartx > 480:
-            fstartx = 480
-    DISPLAYSURF.fill((0, 0, 0))
-    DISPLAYSURF.blit(flwImg, (fstartx, fstarty))
-    pygame.display.update()
+  global fstartx, fstarty
+  keys = pygame.key.get_pressed()
+  if keys[pygame.K_DOWN]:
+    fstarty = fstarty + 5
+    if fstarty > 380:
+      fstarty = 380
+  if keys[pygame.K_UP]:
+    fstarty = fstarty - 5
+    if fstarty < 0:
+      fstarty = 0
+  if keys[pygame.K_LEFT]:
+    fstartx = fstartx - 5
+    if fstartx < 0:
+      fstartx = 0
+  if keys[pygame.K_RIGHT]:
+    fstartx = fstartx + 5
+    if fstartx > 480:
+      fstartx = 480
+  DISPLAYSURF.fill((0, 0, 0))
+  DISPLAYSURF.blit(flwImg, (fstartx, fstarty))
+  pygame.display.update()
+
 
 while not game_over:
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            game_over = True
-    move()
-    clock.tick(10)  # ±±¨î¹CÀ¸³t«×¬°¨C¬í10´V
+  for event in pygame.event.get():
+    if event.type == QUIT:
+      game_over = True
+  move()
+  clock.tick(10)  # æ§åˆ¶éŠæˆ²é€Ÿåº¦ç‚ºæ¯ç§’10å¹€
 pygame.quit()
