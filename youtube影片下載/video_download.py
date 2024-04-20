@@ -14,9 +14,13 @@ def download_video():
     youtubeObject = YouTube(input("Link:"))
     streams = youtubeObject.streams
     highest_resolution_stream = streams.get_highest_resolution()
-    highest_resolution_stream.download(videos_folder)
     title = youtubeObject.title
-    print("Video:", title, "is downloaded to:", videos_folder)
+    destination = os.path.join(videos_folder, f"{title}.mp4")
+    if not os.path.exists(destination):
+        highest_resolution_stream.download(videos_folder)
+        print("Video:", title, "is downloaded to:", destination)
+    else:
+        print("Video already exists in:", destination)
 
 if __name__ == "__main__":
     download_video()
